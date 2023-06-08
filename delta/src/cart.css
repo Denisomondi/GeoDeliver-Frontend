@@ -1,0 +1,12 @@
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cart-item-img {
+  flex: 0 0 100px;
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+}
