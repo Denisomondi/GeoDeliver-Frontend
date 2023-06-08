@@ -8,6 +8,7 @@ import Banner from './components/Banner';
 import SearchBar from './components/SearchBar.js';
 import LoginPage from './components/LoginPage';
 
+
 // LoadingScreen component
 const LoadingScreen = () => {
   return (

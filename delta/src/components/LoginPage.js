@@ -12,32 +12,27 @@ const LoginPage = ({ onLogin }) => {
   const [loginError, setLoginError] = useState('');
   const [signupError, setSignupError] = useState('');
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     // Get the entered username and password
     const username = usernameRef.current.value;
     const password = passwordRef.current.value;
 
-    // Retrieve the stored signup data from localStorage
-    const signUpData = localStorage.getItem('signupData');
-    if (signUpData) {
-      const jsonData = JSON.parse(signUpData);
-      const storedUsername = jsonData.username;
-      const storedPassword = jsonData.password;
-
-      if (username === storedUsername && password === storedPassword) {
-        // Login successful
-        onLogin(username, password);
+    try {
+      const response = await fetch(`http://localhost:4567/users?name=${username}&password=${password}`);
+      if (response.ok) {
+        const user = await response.json();
+        onLogin(user.name, user.email);
       } else {
         setLoginError('Invalid username or password');
       }
-    } else {
-      setLoginError('No signup data found');
+    } catch (error) {
+      setLoginError('Error occurred during login');
     }
   };
 
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
 
     // Get the entered new username and password
@@ -50,17 +45,23 @@ const LoginPage = ({ onLogin }) => {
       return;
     }
 
-    // Create an object to represent the signup data
-    const signUpData = {
-      username: newUsername,
-      password: newPassword,
-    };
-
-    // Store the signup data in localStorage as a JSON string
-    localStorage.setItem('signupData', JSON.stringify(signUpData));
-
-    // Automatically perform login after successful sign up
-    onLogin(newUsername, newPassword);
+    try {
+      const response = await fetch('http://localhost:4567/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: newUsername, password: newPassword }),
+      });
+      if (response.ok) {
+        const user = await response.json();
+        onLogin(user.name, user.email);
+      } else {
+        setSignupError('Error occurred during sign up');
+      }
+    } catch (error) {
+      setSignupError('Error occurred during sign up');
+    }
   };
 
   const toggleSignUp = () => {
@@ -92,7 +93,13 @@ const LoginPage = ({ onLogin }) => {
                   </div>
                   <div className="input-group">
                     <label htmlFor="confirmPassword">Confirm Password</label>
-                    <input type="password" name="confirmPassword" id="confirmPassword" placeholder="" ref={confirmPasswordRef} />
+                    <input
+                      type="password"
+                      name="confirmPassword"
+                      id="confirmPassword"
+                      placeholder=""
+                      ref={confirmPasswordRef}
+                    />
                   </div>
                   <button className="sign" onClick={handleSignUp}>
                     Sign up

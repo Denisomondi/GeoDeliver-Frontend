@@ -1,8 +1,38 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import './Banner.css';
 
-const Banner = React.forwardRef((props, ref) => {
+const Banner = () => {
+  const bannerRef = useRef(null);
+
+  useEffect(() => {
+    const scrollContainer = bannerRef.current;
+
+    const scroll = () => {
+      scrollContainer.scrollBy({
+        left: 2, // Adjust the scroll speed as needed
+        behavior: 'smooth',
+      });
+    };
+
+    let scrollInterval = setInterval(scroll, 50); // Adjust the interval time as needed
+
+    // Stop the automatic scroll when the user interacts with the container
+    scrollContainer.addEventListener('mouseenter', () => {
+      clearInterval(scrollInterval);
+    });
+
+    // Resume the automatic scroll when the user stops interacting with the container
+    scrollContainer.addEventListener('mouseleave', () => {
+      scrollInterval = setInterval(scroll, 50); // Adjust the interval time as needed
+    });
+
+    return () => {
+      clearInterval(scrollInterval);
+    };
+  }, []);
+
   return (
-    <div className="banner-container" ref={ref}>
+    <div className="banner-container" ref={bannerRef}>
       <div className="banner">
         <div className="banner-item">
           <img src="https://img.freepik.com/free-vector/fashion-sale-with-discount-template_23-2148936503.jpg?w=996&t=st=1686128904~exp=1686129504~hmac=2c5081ac580ad356eb57473f6400a4b5fedf50a3d348674394d8b3e2005e696a" alt="Fashion" />
@@ -51,6 +81,6 @@ const Banner = React.forwardRef((props, ref) => {
       </div>
     </div>
   );
-});
+};
 
 export default Banner;

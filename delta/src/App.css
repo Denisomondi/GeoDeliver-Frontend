@@ -187,44 +187,6 @@
   background: green;
   transform: rotate(360deg); /*  rotation animation */
 }
-.banner-container {
-  width: 100%;
-  overflow-x: auto; /* Enable horizontal scrolling */
-  display: flex;
-  justify-content: flex-start; /* Adjust alignment as needed */
-  align-items: center;
-  margin: 7%;
-}
-
-.banner-container::-webkit-scrollbar {
-  width: 1px;
-}
-
-.banner-container::-webkit-scrollbar-thumb {
-  background-color: green;
-  border-radius: 0px 13px;
-}
-
-.banner {
-  display: flex;
-  animation: none; /* Remove the animation */
-}
-
-.banner-item {
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 20px;
-  padding: 10px;
-}
-
-.banner-item img {
-  width: 150%; 
-  height: auto;
-  object-fit:contain;
-  max-height: 300px; 
-}
 
 .boxes {
   --size: 32px;
