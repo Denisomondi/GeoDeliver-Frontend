@@ -8,7 +8,7 @@ Therefore, as an software engineer our job is to ease the path of this transitio
 3. [justin karoki](https://github.com/muriukaroki)
 4. [Teddy wambua](https://github.com/teddy5456)
 
-# The Prime Objective 
+## The Prime Objective 
 1.Viewing orders
 2.Placing orders
 3.Updating database
