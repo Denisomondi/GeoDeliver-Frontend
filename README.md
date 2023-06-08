@@ -2,11 +2,11 @@
 
 In this new modern era of online shopping no seller wants to be left behind and every seller want to the shift from offline selling model to an online selling model for a rampant growth.
 Therefore, as an software engineer our job is to ease the path of this transition for the seller.
-# Authors Names
-1 [Denis omondi](https://github.com/Denisomondi)
-2 [David rimui](https://github.com/DavidRimui)
-3 [justin karoki](https://github.com/muriukaroki)
-4 [Teddy wambua](https://github.com/teddy5456)
+## Authors Names
+1. [Denis omondi](https://github.com/Denisomondi)
+2. [David rimui](https://github.com/DavidRimui)
+3. [justin karoki](https://github.com/muriukaroki)
+4. [Teddy wambua](https://github.com/teddy5456)
 
 # The Prime Objective 
 1.Viewing orders
