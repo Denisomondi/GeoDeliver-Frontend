@@ -28,6 +28,16 @@
   }
   
   .nav-links li a:hover {
-    color: #61dafb;
+    color: #0b8d1c;
+  }
+
+  .logout {
+    background-color: #0b8d1c;
+    padding: 5px 10px;
+    border-radius: 13px;
+  }
+
+  .logout:hover {
+  color: rgb(3, 3, 29);
   }
   
