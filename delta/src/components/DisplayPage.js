@@ -5,6 +5,7 @@ const DisplayPage = ({ product, addToCart, onClose }) => {
 
   const handleAddToCart = () => {
     addToCart(id);
+    onClose();
   };
 
   return (

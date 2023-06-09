@@ -58,9 +58,9 @@ const LandingPage = () => {
               <h3>{product.name}</h3>
               <p>${product.price}</p>
               <p>{product.description}</p>
-              <a className="add-to-cart-button" onClick={() => openPopup(product)}>
+              <button className="add-to-cart-button" onClick={() => addToCart(product.id)}>
                 Add to Cart
-              </a>
+              </button>
               <a className="more-details-button" onClick={() => openPopup(product)}>
                 More Details
               </a>
