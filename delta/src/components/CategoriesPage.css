@@ -1,0 +1,127 @@
+.categories-page {
+    text-align: center;
+  }
+  
+  .category-container {
+    overflow-x: auto;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 800px;
+    display: flex; /* Added */
+    justify-content: center; /* Added */
+  }
+  
+  .category-cards {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    position: relative;
+    padding: 10px;
+    justify-content: center; /* Added */
+  }
+  
+  .category-card {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    transition: transform 0.3s ease;
+    z-index: 1;
+    background-color: green; /* Set the background color of unselected cards to green */
+  }
+  
+  .category-card.selected {
+    background-color: #f0f0f0;
+    border-color: green;
+    border-radius: 105px;
+    width: 250px;
+    height: 250px;
+    transform: scale(1.2);
+    z-index: 2;
+  }
+  
+  .category-card.small {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.6);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    opacity: 0.5;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .category-card.small:hover {
+    opacity: 0.8;
+  }
+  
+  .category-image img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .category-name {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .product-list {
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 800px;
+  }
+  
+  .product-list h2 {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .product-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .product-card h3 {
+    margin-bottom: 5px;
+  }
+  
+  .product-card p {
+    margin-bottom: 5px;
+  }
+  
+  .product-card p:last-child {
+    font-weight: bold;
+  }
+  

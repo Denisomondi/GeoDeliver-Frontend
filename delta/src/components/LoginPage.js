@@ -3,7 +3,7 @@ import './LoginPage.css';
 import Header from './Header';
 
 const LoginPage = ({ onLogin }) => {
-  const usernameRef = useRef(null);
+  const usernameEmailRef = useRef(null);
   const passwordRef = useRef(null);
   const newUsernameRef = useRef(null);
   const newPasswordRef = useRef(null);
@@ -11,21 +11,28 @@ const LoginPage = ({ onLogin }) => {
   const [showSignUp, setShowSignUp] = useState(false);
   const [loginError, setLoginError] = useState('');
   const [signupError, setSignupError] = useState('');
+  const emailRef = useRef(null);
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Get the entered username and password
-    const username = usernameRef.current.value;
+    // Get the entered username or email and password
+    const usernameEmail = usernameEmailRef.current.value;
     const password = passwordRef.current.value;
 
     try {
-      const response = await fetch(`http://localhost:4567/users?name=${username}&password=${password}`);
+      const response = await fetch(`http://localhost:4567/users?name=${usernameEmail}&password=${password}`);
       if (response.ok) {
         const user = await response.json();
         onLogin(user.name, user.email);
       } else {
-        setLoginError('Invalid username or password');
+        const emailResponse = await fetch(`http://localhost:4567/users?email=${usernameEmail}&password=${password}`);
+        if (emailResponse.ok) {
+          const user = await emailResponse.json();
+          onLogin(user.name, user.email);
+        } else {
+          setLoginError('Invalid username or password');
+        }
       }
     } catch (error) {
       setLoginError('Error occurred during login');
@@ -35,10 +42,11 @@ const LoginPage = ({ onLogin }) => {
   const handleSignUp = async (e) => {
     e.preventDefault();
 
-    // Get the entered new username and password
+    // Get the entered new username, password, and email
     const newUsername = newUsernameRef.current.value;
     const newPassword = newPasswordRef.current.value;
     const confirmPassword = confirmPasswordRef.current.value;
+    const email = emailRef.current.value;
 
     if (newPassword !== confirmPassword) {
       setSignupError('Passwords do not match');
@@ -51,13 +59,19 @@ const LoginPage = ({ onLogin }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name: newUsername, password: newPassword }),
+        body: JSON.stringify({ name: newUsername, password: newPassword, email: email }),
       });
       if (response.ok) {
         const user = await response.json();
         onLogin(user.name, user.email);
       } else {
-        setSignupError('Error occurred during sign up');
+        const emailResponse = await fetch(`http://localhost:4567/users?email=${email}`);
+        if (emailResponse.ok) {
+          const user = await emailResponse.json();
+          onLogin(user.name, user.email);
+        } else {
+          setSignupError('Error occurred during sign up');
+        }
       }
     } catch (error) {
       setSignupError('Error occurred during sign up');
@@ -88,8 +102,18 @@ const LoginPage = ({ onLogin }) => {
                     <input type="text" name="newUsername" id="newUsername" placeholder="" ref={newUsernameRef} />
                   </div>
                   <div className="input-group">
+                    <label htmlFor="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="" ref={emailRef} />
+                  </div>
+                  <div className="input-group">
                     <label htmlFor="newPassword">New Password</label>
-                    <input type="password" name="newPassword" id="newPassword" placeholder="" ref={newPasswordRef} />
+                    <input
+                      type="password"
+                      name="newPassword"
+                      id="newPassword"
+                      placeholder=""
+                      ref={newPasswordRef}
+                    />
                   </div>
                   <div className="input-group">
                     <label htmlFor="confirmPassword">Confirm Password</label>
@@ -111,15 +135,21 @@ const LoginPage = ({ onLogin }) => {
               ) : (
                 <>
                   <div className="input-group">
-                    <label htmlFor="username">Username</label>
-                    <input type="text" name="username" id="username" placeholder="" ref={usernameRef} />
+                    <label htmlFor="usernameEmail">Enter Username or Email</label>
+                    <input
+                      type="text"
+                      name="usernameEmail"
+                      id="usernameEmail"
+                      placeholder=""
+                      ref={usernameEmailRef}
+                    />
                   </div>
                   <div className="input-group">
                     <label htmlFor="password">Password</label>
                     <input type="password" name="password" id="password" placeholder="" ref={passwordRef} />
                     <div className="forgot">
                       <a rel="noopener noreferrer" href="#">
-                        Forgot Password ?
+                        Forgot Password?
                       </a>
                     </div>
                   </div>

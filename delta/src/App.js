@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import Navbar from './components/Navbar';
 import LandingPage from './components/LandingPage';
 import Header from './components/Header';
@@ -7,7 +9,9 @@ import ShoppingCart from './components/shoppingcart';
 import Banner from './components/Banner';
 import SearchBar from './components/SearchBar.js';
 import LoginPage from './components/LoginPage';
-
+import CategoriesPage from './components/CategoriesPage';
+import AboutUs from './components/AboutUs';
+import SellWithUs from './components/SellWithUs';
 
 // LoadingScreen component
 const LoadingScreen = () => {
@@ -87,14 +91,25 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar onLogout={handleLogout} username={username} />
-      <Header />
-      <section>
-        <SearchBar />
-      </section>
-      <Banner ref={bannerRef} />
-      <LandingPage />
-      <ShoppingCart />
+      <Router>
+        <Navbar onLogout={handleLogout} username={username} />
+        <Header />
+        <Routes>
+          <Route path="/" element={
+            <>
+              <section>
+                <SearchBar />
+              </section>
+              <Banner ref={bannerRef} />
+              <LandingPage />
+            </>
+          } />
+          <Route path="/cart" element={<ShoppingCart />} />
+          <Route path="/CategoriesPage" element={<CategoriesPage />} />
+          <Route path="/about" element={<AboutUs />} /> 
+          <Route path="/sell" element={<SellWithUs />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
