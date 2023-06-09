@@ -95,7 +95,7 @@ const ProductForm = () => {
         <br />
         <label>Choose Category:</label>
         {!showCategory && (
-          <button type="button" onClick={showCategoryField}>
+          <button className='btn-main' type="button" onClick={showCategoryField}>
             Select Category
           </button>
         )}

@@ -20,18 +20,11 @@
 }
 
 .product-card {
-  box-sizing: border-box;
-  background: #fff;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s;
+  position: relative;
 }
 
 .product-card::after {
-  content: "Add to Cart";
+  content: "More Information";
   background-image: url(https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F1413%2F1413908.png&tbnid=3AcEP4Ze09SMsM&vet=12ahUKEwiQgrGp5K__AhURpicCHXY2CRMQMygIegUIARCDAg..i&imgrefurl=https%3A%2F%2Fwww.flaticon.com%2Ffree-icon%2Fshopping-cart_1413908&docid=fbhJRv-xB_3NsM&w=512&h=512&q=shopping%20cart&ved=2ahUKEwiQgrGp5K__AhURpicCHXY2CRMQMygIegUIARCDAg); /* Path to your SVG icon file */
   background-size: cover;
   background-position: center;
@@ -53,9 +46,9 @@
 }
 
 .product-card:hover::after {
-  bottom: 0;
   opacity: 1;
 }
+
 
 .product-card:hover {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -107,3 +100,18 @@
     }
   }
   
+  .add-to-cart-button {
+    display: inline-block;
+    padding: 0.5em 1em;
+    background-color: #00AC7C;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .add-to-cart-button:hover {
+    background-color: #008f62;
+    cursor: pointer;
+  }
