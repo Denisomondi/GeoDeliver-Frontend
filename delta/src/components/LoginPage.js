@@ -97,6 +97,7 @@ const LoginPage = ({ onLogin }) => {
             <form className="form">
               {showSignUp ? (
                 <>
+                <div classname="signup">
                   <div className="input-group">
                     <label htmlFor="newUsername">Username</label>
                     <input type="text" name="newUsername" id="newUsername" placeholder="" ref={newUsernameRef} />
@@ -131,10 +132,11 @@ const LoginPage = ({ onLogin }) => {
                   <div className="no-account" onClick={toggleSignUp}>
                     Already have an account? Sign in
                   </div>
+                </div>
                 </>
               ) : (
                 <>
-                  <div className="input-group">
+                  <div className="input-group2">
                     <label htmlFor="usernameEmail">Enter Username or Email</label>
                     <input
                       type="text"
@@ -144,7 +146,7 @@ const LoginPage = ({ onLogin }) => {
                       ref={usernameEmailRef}
                     />
                   </div>
-                  <div className="input-group">
+                  <div className="input-group2">
                     <label htmlFor="password">Password</label>
                     <input type="password" name="password" id="password" placeholder="" ref={passwordRef} />
                     <div className="forgot">

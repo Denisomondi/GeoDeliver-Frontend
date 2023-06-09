@@ -115,3 +115,39 @@
     background-color: #008f62;
     cursor: pointer;
   }
+
+  .popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .display-page {
+    background-color: #fff;
+    padding: 20px;
+  }
+  
+  .display-page img {
+    width: 200px;
+    height: auto;
+  }
+  
+  .display-page h3 {
+    margin-top: 0;
+  }
+  
+  .display-page p {
+    margin-bottom: 10px;
+  }
+  
+  .display-page button {
+    display: block;
+    margin-top: 10px;
+  }
+  

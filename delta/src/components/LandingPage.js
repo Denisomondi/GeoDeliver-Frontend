@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './LandingPage.css';
+import DisplayPage from './DisplayPage';
 
 const LandingPage = () => {
   const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     fetchRecentProducts();
@@ -37,6 +39,14 @@ const LandingPage = () => {
     }
   };
 
+  const openPopup = (product) => {
+    setSelectedProduct(product);
+  };
+
+  const closePopup = () => {
+    setSelectedProduct(null);
+  };
+
   return (
     <div>
       <section>
@@ -48,13 +58,19 @@ const LandingPage = () => {
               <h3>{product.name}</h3>
               <p>${product.price}</p>
               <p>{product.description}</p>
-              <a className="add-to-cart-button" onClick={() => addToCart(product.id)}>
+              <a className="add-to-cart-button" onClick={() => openPopup(product)}>
                 Add to Cart
+              </a>
+              <a className="more-details-button" onClick={() => openPopup(product)}>
+                More Details
               </a>
             </div>
           ))}
         </div>
       </section>
+      {selectedProduct && (
+        <DisplayPage product={selectedProduct} addToCart={addToCart} onClose={closePopup} />
+      )}
     </div>
   );
 };
