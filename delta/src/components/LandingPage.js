@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './LandingPage.css';
 import DisplayPage from './DisplayPage';
+import { ShoppingCartContext } from './ShoppingCartContext';
 
 const LandingPage = () => {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const { addToCart } = useContext(ShoppingCartContext);
 
   useEffect(() => {
     fetchRecentProducts();
@@ -21,22 +23,9 @@ const LandingPage = () => {
     }
   };
 
-  const addToCart = async (productId) => {
-    try {
-      const response = await fetch('http://localhost:4567/cart/add', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          productId: productId
-        })
-      });
-      const data = await response.json();
-      console.log(data.message);
-    } catch (error) {
-      console.error('Error adding product to cart:', error);
-    }
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    // You can add additional logic here if needed
   };
 
   const openPopup = (product) => {
@@ -58,7 +47,7 @@ const LandingPage = () => {
               <h3>{product.name}</h3>
               <p>${product.price}</p>
               <p>{product.description}</p>
-              <button className="add-to-cart-button" onClick={() => addToCart(product.id)}>
+              <button className="add-to-cart-button" onClick={() => handleAddToCart(product)}>
                 Add to Cart
               </button>
               <a className="more-details-button" onClick={() => openPopup(product)}>
@@ -69,7 +58,7 @@ const LandingPage = () => {
         </div>
       </section>
       {selectedProduct && (
-        <DisplayPage product={selectedProduct} addToCart={addToCart} onClose={closePopup} />
+        <DisplayPage product={selectedProduct} addToCart={handleAddToCart} onClose={closePopup} />
       )}
     </div>
   );

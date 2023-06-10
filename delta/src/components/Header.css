@@ -1,0 +1,29 @@
+@keyframes rotateWords {
+    0% {
+      transform: translateY(0);
+    }
+    16% {
+      transform: translateY(-100%);
+    }
+    32% {
+      transform: translateY(-200%);
+    }
+    48% {
+      transform: translateY(-300%);
+    }
+    64% {
+      transform: translateY(-400%);
+    }
+    80% {
+      transform: translateY(-500%);
+    }
+    100% {
+      transform: translateY(-600%);
+    }
+  }
+  
+  .rotating-words {
+    color: rgb(243, 100, 17);
+    animation: rotateWords 12s infinite;
+  }
+  

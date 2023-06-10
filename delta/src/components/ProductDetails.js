@@ -8,7 +8,7 @@ const ProductDetails = ({ product, onClose }) => {
     <div className="product-details">
       <h2>Product Details</h2>
       <p>{product.name}</p>
-      <p>${product.price}</p>
+      <p>{product.price && `$${product.price.toFixed(2)}`}</p>
       <p>{product.description}</p>
       <button onClick={onClose}>Close</button>
     </div>
@@ -41,46 +41,4 @@ const ShoppingCart = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          productId: productId
-        })
-      });
-      const data = await response.json();
-      console.log(data.message);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const openProductDetails = (product) => {
-    setSelectedProduct(product);
-  };
-
-  const closeProductDetails = () => {
-    setSelectedProduct(null);
-  };
-
-  return (
-    <div>
-      <h2>Shopping Cart</h2>
-      <div className="shopping-cart-items">
-        {products.map((product) => (
-          <div className="cart-item" key={product.id}>
-            <div className="item-info">
-              <input type="checkbox" />
-              <h3>{product.name}</h3>
-              <p>${product.price}</p>
-            </div>
-            <button onClick={() => addToCart(product.id)}>Add to Cart</button>
-            <button onClick={() => openProductDetails(product)}>Details</button>
-          </div>
-        ))}
-      </div>
-      {selectedProduct && (
-        <ProductDetails product={selectedProduct} onClose={closeProductDetails} />
-      )}
-    </div>
-  );
-};
-
-export default ShoppingCart;
+        body: JSON

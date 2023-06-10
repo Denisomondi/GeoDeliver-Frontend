@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
 import Navbar from './components/Navbar';
 import LandingPage from './components/LandingPage';
 import Header from './components/Header';
@@ -12,77 +11,99 @@ import LoginPage from './components/LoginPage';
 import CategoriesPage from './components/CategoriesPage';
 import AboutUs from './components/AboutUs';
 import SellWithUs from './components/SellWithUs';
+import AccountManagement from './components/AccountManagement';
+import { ShoppingCartProvider } from './components/ShoppingCartContext';
+import ProductCard from './components/ProductCard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 // LoadingScreen component
 const LoadingScreen = () => {
   return (
     <div className="boxes">
-      <div className="box">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <div className="box">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <div className="box">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <div className="box">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+      {/* Loading screen content */}
     </div>
   );
 };
 
 function App() {
   const bannerRef = useRef(null);
+  const headerRef = useRef(null);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [username, setUsername] = useState('');
+  const [user, setUser] = useState(null);
   const [loggingIn, setLoggingIn] = useState(false);
+  const [productData, setProductData] = useState([]); // Placeholder for product data
+  const [searchResults, setSearchResults] = useState(null);
+  const [showSearchBar, setShowSearchBar] = useState(false); // State variable for controlling search bar visibility
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
-    const savedUsername = localStorage.getItem('username');
+    const savedUser = JSON.parse(localStorage.getItem('user'));
 
-    if (isLoggedIn) {
+    if (isLoggedIn && savedUser) {
       setLoggedIn(true);
-      setUsername(savedUsername);
+      setUser(savedUser);
     }
+
+    // Simulate fetching product data from an API
+    fetchProductData(); // Call the function to fetch product data
   }, []);
 
-  const handleLogin = (username) => {
+  const fetchProductData = () => {
+    const products = [
+      // Sample product data
+      { id: 1, name: 'Product 1', price: 10.99 },
+      { id: 2, name: 'Product 2', price: 19.99 },
+      { id: 3, name: 'Product 3', price: 5.99 },
+    ];
+
+    setProductData(products);
+  };
+
+  const handleSearch = (data) => {
+    console.log('Search results:', data);
+    setSearchResults(data);
+    setShowSearchBar(false); // Hide the search bar after search
+  };
+
+  const handleLogin = (user) => {
     setLoggingIn(true);
 
-    // Simulate an asynchronous login process (e.g., API call) with a timeout
+    // Asynchronous login process (API call) with a timeout. Loads API while loading login.
     setTimeout(() => {
       setLoggedIn(true);
-      setUsername(username);
+      setUser(user);
       localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('username', username);
+      localStorage.setItem('user', JSON.stringify(user));
       setLoggingIn(false);
     }, 1200);
   };
 
   const handleLogout = () => {
     setLoggedIn(false);
-    setUsername('');
+    setUser(null);
     localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('username');
+    localStorage.removeItem('user');
   };
 
+  const toggleSearchBar = () => {
+    setShowSearchBar((prevShowSearchBar) => !prevShowSearchBar); // Toggle the value of showSearchBar
+  };
+
+  useEffect(() => {
+    const headerTimeout = setTimeout(() => {
+      if (headerRef.current) {
+        headerRef.current.style.opacity = 0;
+        headerRef.current.style.visibility = 'hidden';
+      }
+    }, 10000);
+
+    return () => clearTimeout(headerTimeout);
+  }, []);
+
   if (loggingIn) {
-    return <LoadingScreen />; // Display the loading screen while logging in
+    return <LoadingScreen />; // Display the loading screen while logging in, so that all the fetch requests in the landing page load.
   }
 
   if (!loggedIn) {
@@ -91,27 +112,79 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
-        <Navbar onLogout={handleLogout} username={username} />
-        <Header />
-        <Routes>
-          <Route path="/" element={
-            <>
-              <section>
-                <SearchBar />
-              </section>
-              <Banner ref={bannerRef} />
-              <LandingPage />
-            </>
-          } />
-          <Route path="/cart" element={<ShoppingCart />} />
-          <Route path="/CategoriesPage" element={<CategoriesPage />} />
-          <Route path="/about" element={<AboutUs />} /> 
-          <Route path="/sell" element={<SellWithUs />} />
-        </Routes>
-      </Router>
+      <ShoppingCartProvider>
+        <Router>
+          <Navbar
+            onLogout={handleLogout}
+            user={user}
+            onSearchButtonClick={toggleSearchBar} // Pass the toggleSearchBar function as a prop
+          />
+          <Header ref={headerRef} />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  {showSearchBar && (
+                    <section>
+                      <SearchBar onSearch={handleSearch} />
+                    </section>
+                  )}
+                  <Banner ref={bannerRef} />
+                  {searchResults ? (
+                    // Render search results component if there are search results
+                    <SearchResults results={searchResults} onClose={() => setSearchResults(null)} />
+                  ) : (
+                    // Render landing page component if there are no search results
+                    <LandingPage />
+                  )}
+                </>
+              }
+            />
+            <Route path="/cart" element={<ShoppingCart products={productData} />} />
+            <Route path="/CategoriesPage" element={<CategoriesPage />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/sell" element={<SellWithUs />} />
+            <Route
+              path="/Account"
+              element={
+                <AccountManagement
+                  user={user}
+                  userId={user.userId} 
+                  onUpdate={handleLogin}
+                  onLogout={handleLogout}
+                />
+              }
+            />
+          </Routes>
+        </Router>
+      </ShoppingCartProvider>
     </div>
   );
 }
+
+// SearchResults component to render the search results
+const SearchResults = ({ results, onClose }) => {
+  return (
+    <div className="search-results">
+      <div className="search-results-header">
+        <h2>
+          <FontAwesomeIcon icon={faSearch} />
+          Search Results
+          <FontAwesomeIcon
+            icon={faTimes}
+            onClick={onClose}
+            className="closeResult"
+          />
+        </h2>
+      </div>
+      <div className="product-grid">
+        {results.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default App;

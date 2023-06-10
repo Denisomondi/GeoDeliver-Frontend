@@ -53,3 +53,16 @@
 .logout a:hover {
   color: #555555;
 }
+
+.nav-links li.selected {
+  border-bottom: 2px solid green;
+  color: green; /* Change the color of the selected item */
+}
+
+.search-button {
+  background-color: white;
+  border: none;
+  font-family: poppins;
+  font-weight: bold;
+  font-size: 14px;
+}

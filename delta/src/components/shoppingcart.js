@@ -1,71 +1,110 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
+import { ShoppingCartContext } from './ShoppingCartContext';
 import './ShoppingCart.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import Checkout from './Checkout';
 
 const ShoppingCart = () => {
-  const [cartItems, setCartItems] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const { selectedProducts, removeFromCart, clearCart } = useContext(ShoppingCartContext);
+  const [showCheckout, setShowCheckout] = useState(false);
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
+  const handleRemoveFromCart = (productId) => {
+    removeFromCart(productId);
+    // You can add additional logic here if needed
+  };
 
-  const fetchProducts = async () => {
-    try {
-      const response = await fetch('http://localhost:4567/products');
-      const data = await response.json();
-      setProducts(data);
-    } catch (error) {
-      console.log(error);
+  const handleClearCart = () => {
+    clearCart();
+    // You can add additional logic here if needed
+  };
+
+  const calculateTotalPrice = () => {
+    let totalPrice = 0;
+    for (const product of selectedProducts) {
+      totalPrice += product.price;
     }
+    return totalPrice.toFixed(2);
   };
 
-  const handleCheckboxChange = (productId, price) => {
-    const updatedCartItems = cartItems.includes(productId)
-      ? cartItems.filter((item) => item !== productId)
-      : [...cartItems, productId];
-    setCartItems(updatedCartItems);
-
-    const updatedTotalPrice = updatedCartItems.reduce((total, itemId) => {
-      const itemPrice = products.find((product) => product.id === itemId)?.price || 0;
-      return total + itemPrice;
-    }, 0);
-    setTotalPrice(updatedTotalPrice);
+  const handleOpenCheckout = () => {
+    setShowCheckout(true);
   };
+
+  const handleCloseCheckout = () => {
+    setShowCheckout(false);
+  };
+
+  const orderData = {
+    items: selectedProducts.map((product) => ({
+      id: product.id,
+      name: product.name,
+      quantity: 1, // Assuming quantity is always 1 for each product in the cart
+      price: product.price,
+    })),
+    totalAmount: calculateTotalPrice(),
+  };
+
+  console.log('orderData:', orderData); // Log the orderData to the console
 
   return (
     <div>
-      <h2>Shopping Cart</h2>
-      <div className="total-price">Total Price: ${totalPrice.toFixed(2)}</div>
-      <table className="shopping-cart-table">
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Select</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map((product) => (
-            <tr key={product.id}>
-              <td>{product.name}</td>
-              <td>${product.price}</td>
-              <td>{product.category}</td>
-              <td>
-                <label className="checkbox-label">
-                  <input
-                    type="checkbox"
-                    checked={cartItems.includes(product.id)}
-                    onChange={() => handleCheckboxChange(product.id, product.price)}
-                  />
-                  <span className="checkbox-custom"></span>
-                </label>
-              </td>
+      <h2 className="shopping-cart">Shopping Cart</h2>
+      {selectedProducts.length === 0 ? (
+        <p>Your shopping cart is empty.</p>
+      ) : (
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Price</th>
+              <th className="action">remove</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {selectedProducts.map((product) => (
+              <tr key={product.id}>
+                <td>{product.name}</td>
+                <td>${product.price.toFixed(2)}</td>
+                <td>
+                  <button
+                    className="remove-button"
+                    onClick={() => handleRemoveFromCart(product.id)}
+                  >
+                    <FontAwesomeIcon icon={faTimes} />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colSpan={2}>Total Price:</td>
+              <td className="price">${calculateTotalPrice()}</td>
+            </tr>
+          </tfoot>
+        </table>
+      )}
+      {selectedProducts.length > 0 && (
+        <div>
+          <button className="clear" onClick={handleClearCart}>
+            Clear Cart
+          </button>
+          <button className="checkout" onClick={handleOpenCheckout}>
+            Checkout
+          </button>
+        </div>
+      )}
+      {showCheckout && (
+        <div className="checkout-popup">
+          <div className="checkout-popup-inner">
+            <button className="close-button" onClick={handleCloseCheckout}>
+              <FontAwesomeIcon icon={faTimes} />
+            </button>
+            <Checkout orderData={orderData} onClose={handleCloseCheckout} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

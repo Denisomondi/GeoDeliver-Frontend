@@ -15,20 +15,24 @@ const LoginPage = ({ onLogin }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     // Get the entered username or email and password
     const usernameEmail = usernameEmailRef.current.value;
     const password = passwordRef.current.value;
-
+  
+    console.log('Login Data:', { usernameEmail, password });
+  
     try {
       const response = await fetch(`http://localhost:4567/users?name=${usernameEmail}&password=${password}`);
       if (response.ok) {
         const user = await response.json();
+        console.log('User ID:', user.id); // Log the user ID
         onLogin(user.name, user.email);
       } else {
         const emailResponse = await fetch(`http://localhost:4567/users?email=${usernameEmail}&password=${password}`);
         if (emailResponse.ok) {
           const user = await emailResponse.json();
+          console.log('User ID:', user.id); // Log the user ID
           onLogin(user.name, user.email);
         } else {
           setLoginError('Invalid username or password');
@@ -38,21 +42,23 @@ const LoginPage = ({ onLogin }) => {
       setLoginError('Error occurred during login');
     }
   };
-
+  
   const handleSignUp = async (e) => {
     e.preventDefault();
-
+  
     // Get the entered new username, password, and email
     const newUsername = newUsernameRef.current.value;
     const newPassword = newPasswordRef.current.value;
     const confirmPassword = confirmPasswordRef.current.value;
     const email = emailRef.current.value;
-
+  
+    console.log('Sign Up Data:', { newUsername, newPassword, confirmPassword, email });
+  
     if (newPassword !== confirmPassword) {
       setSignupError('Passwords do not match');
       return;
     }
-
+  
     try {
       const response = await fetch('http://localhost:4567/users', {
         method: 'POST',
@@ -63,11 +69,13 @@ const LoginPage = ({ onLogin }) => {
       });
       if (response.ok) {
         const user = await response.json();
+        console.log('User ID:', user.id); // Log the user ID
         onLogin(user.name, user.email);
       } else {
         const emailResponse = await fetch(`http://localhost:4567/users?email=${email}`);
         if (emailResponse.ok) {
           const user = await emailResponse.json();
+          console.log('User ID:', user.id); // Log the user ID
           onLogin(user.name, user.email);
         } else {
           setSignupError('Error occurred during sign up');
@@ -77,6 +85,7 @@ const LoginPage = ({ onLogin }) => {
       setSignupError('Error occurred during sign up');
     }
   };
+  
 
   const toggleSignUp = () => {
     setShowSignUp(!showSignUp);
@@ -97,42 +106,42 @@ const LoginPage = ({ onLogin }) => {
             <form className="form">
               {showSignUp ? (
                 <>
-                <div classname="signup">
-                  <div className="input-group">
-                    <label htmlFor="newUsername">Username</label>
-                    <input type="text" name="newUsername" id="newUsername" placeholder="" ref={newUsernameRef} />
+                  <div classname="signup">
+                    <div className="input-group">
+                      <label htmlFor="newUsername">Username</label>
+                      <input type="text" name="newUsername" id="newUsername" placeholder="" ref={newUsernameRef} />
+                    </div>
+                    <div className="input-group">
+                      <label htmlFor="email">Email</label>
+                      <input type="email" name="email" id="email" placeholder="" ref={emailRef} />
+                    </div>
+                    <div className="input-group">
+                      <label htmlFor="newPassword">New Password</label>
+                      <input
+                        type="password"
+                        name="newPassword"
+                        id="newPassword"
+                        placeholder=""
+                        ref={newPasswordRef}
+                      />
+                    </div>
+                    <div className="input-group">
+                      <label htmlFor="confirmPassword">Confirm Password</label>
+                      <input
+                        type="password"
+                        name="confirmPassword"
+                        id="confirmPassword"
+                        placeholder=""
+                        ref={confirmPasswordRef}
+                      />
+                    </div>
+                    <button className="sign" onClick={handleSignUp}>
+                      Sign up
+                    </button>
+                    <div className="no-account" onClick={toggleSignUp}>
+                      Already have an account? Sign in
+                    </div>
                   </div>
-                  <div className="input-group">
-                    <label htmlFor="email">Email</label>
-                    <input type="email" name="email" id="email" placeholder="" ref={emailRef} />
-                  </div>
-                  <div className="input-group">
-                    <label htmlFor="newPassword">New Password</label>
-                    <input
-                      type="password"
-                      name="newPassword"
-                      id="newPassword"
-                      placeholder=""
-                      ref={newPasswordRef}
-                    />
-                  </div>
-                  <div className="input-group">
-                    <label htmlFor="confirmPassword">Confirm Password</label>
-                    <input
-                      type="password"
-                      name="confirmPassword"
-                      id="confirmPassword"
-                      placeholder=""
-                      ref={confirmPasswordRef}
-                    />
-                  </div>
-                  <button className="sign" onClick={handleSignUp}>
-                    Sign up
-                  </button>
-                  <div className="no-account" onClick={toggleSignUp}>
-                    Already have an account? Sign in
-                  </div>
-                </div>
                 </>
               ) : (
                 <>
