@@ -5,9 +5,8 @@ import myImage from './vecteezy_3d-rendering-online-payment-for-ecommerce-or-onl
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
-
 const Navbar = ({ onLogout, onSearchButtonClick }) => {
-  const [selectedItem, setSelectedItem] = useState('');
+  const [selectedItem, setSelectedItem] = useState('home');
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -54,7 +53,7 @@ const Navbar = ({ onLogout, onSearchButtonClick }) => {
           </Link>
         </li>
         <li className={selectedItem === 'account' ? 'selected' : ''}>
-          <Link to="/Account" onClick={() => setSelectedItem('account')}>
+          <Link to="/account" onClick={() => setSelectedItem('account')}>
             Account
           </Link>
         </li>
@@ -63,7 +62,6 @@ const Navbar = ({ onLogout, onSearchButtonClick }) => {
             Logout
           </a>
         </li>
-        
       </ul>
     </nav>
   );

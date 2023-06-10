@@ -173,10 +173,10 @@ const ProductForm = () => {
         <br />
         <label>
           Description:
-          <textarea value={description} onChange={(event) => setDescription(event.target.value)} />
+          <textarea value={description} onChange={(event) => setDescription(event.target.value)}></textarea>
         </label>
         <br />
-        <button type="submit">Create Product</button>
+        <button className='btn-main' type="submit">Submit</button>
       </form>
     </>
   );

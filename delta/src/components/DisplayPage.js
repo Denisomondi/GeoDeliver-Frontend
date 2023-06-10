@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ShoppingCartContext } from './ShoppingCartContext';
 
-const DisplayPage = ({ product, addToCart, onClose }) => {
+const DisplayPage = ({ product, onClose }) => {
   const { id, name, image, price, description } = product;
+  const { addToCart } = useContext(ShoppingCartContext);
 
   const handleAddToCart = () => {
-    addToCart(id);
+    addToCart(product);
     onClose();
   };
 

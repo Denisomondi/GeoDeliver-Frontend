@@ -1,44 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import './ProductDetails.css';
+import React, { useContext } from 'react';
+import { ShoppingCartContext } from './ShoppingCartContext';
 
 const ProductDetails = ({ product, onClose }) => {
-  // Logic for displaying product details
+  const { addToCart } = useContext(ShoppingCartContext);
+
+  const handleAddToCart = () => {
+    addToCart(product);
+  };
 
   return (
-    <div className="product-details">
+    <div>
       <h2>Product Details</h2>
       <p>{product.name}</p>
-      <p>{product.price && `$${product.price.toFixed(2)}`}</p>
+      {product.price ? (
+        <p>${product.price.toFixed(2)}</p>
+      ) : (
+        <p>Price not available</p>
+      )}
       <p>{product.description}</p>
       <button onClick={onClose}>Close</button>
+      <button className="add-to-cart-button" onClick={handleAddToCart}>
+        Add to Cart
+      </button>
     </div>
   );
 };
 
-const ShoppingCart = () => {
-  const [cartItems, setCartItems] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null);
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const fetchProducts = async () => {
-    try {
-      const response = await fetch('http://localhost:4567/products');
-      const data = await response.json();
-      setProducts(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const addToCart = async (productId) => {
-    try {
-      const response = await fetch('http://localhost:4567/products/cart/add', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON
+export default ProductDetails;
