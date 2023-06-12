@@ -38,6 +38,11 @@ The project structure is organized as follows:
 - `src/components/ProductCard.js`: Renders a product card.
 - `src/components/ShoppingCartContext.js`: Provides a shopping cart context for managing cart state.
 - `src/App.js`: The main component that serves as the entry point for the application.
+-
+##CRUD operations
+- GET  : the react app is fetching data from our server
+- PUT : the user can update their data
+- POST : the user can add data to the server side
 
 ## Functionality
 
