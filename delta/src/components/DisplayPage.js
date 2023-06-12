@@ -15,8 +15,8 @@ const DisplayPage = ({ product, onClose }) => {
       <div className="product-details">
         <img src={image} alt={name} />
         <h3>{name}</h3>
-        <p>${price}</p>
-        <p>{description}</p>
+        <p><span className='black'>Price:</span>${price}</p>
+        <p><span className='black'>Description:</span>{description}</p>
       </div>
       <div className="actions">
         <button className="add-to-cart-button" onClick={handleAddToCart}>

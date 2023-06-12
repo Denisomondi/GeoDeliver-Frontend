@@ -4,6 +4,7 @@ import './ShoppingCart.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import Checkout from './Checkout';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const ShoppingCart = ({ user }) => {
   const { selectedProducts, removeFromCart, clearCart } = useContext(ShoppingCartContext);
@@ -67,11 +68,11 @@ const ShoppingCart = ({ user }) => {
                 <td>{product.name}</td>
                 <td>${product.price.toFixed(2)}</td>
                 <td>
-                  <button
-                    className="remove-button"
+                  <button 
+                    className="button"
                     onClick={() => handleRemoveFromCart(product.id)}
                   >
-                    <FontAwesomeIcon icon={faTimes} />
+                    <FontAwesomeIcon icon={faTrash} />
                   </button>
                 </td>
               </tr>

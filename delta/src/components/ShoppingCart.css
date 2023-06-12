@@ -31,7 +31,7 @@
 }
 
 /* Button styles */
-.table button {
+/* .table button {
   padding: 8px 16px;
   margin-top: 10px;
   background-color: #19c21e;
@@ -39,7 +39,7 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
-}
+} */
 
 .table button:hover {
   background-color: #f13d06;
@@ -197,3 +197,51 @@
 }
 
 /* Add any additional styling for the checkout popup as needed */
+
+.button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: red;
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: .3s;
+  overflow: hidden;
+  position: relative;
+}
+
+
+.button:hover {
+  width: 60px;
+  border-radius: 50px;
+  transition-duration: .3s;
+  background-color: rgb(255, 69, 69);
+  align-items: center;
+}
+
+.button:hover .svgIcon {
+  width: 50px;
+  transition-duration: .3s;
+  transform: translateY(60%);
+}
+
+.button::before {
+  position: absolute;
+  top: -20px;
+  content: "Delete";
+  color: white;
+  transition-duration: .3s;
+  font-size: 2px;
+}
+
+.button:hover::before {
+  font-size: 13px;
+  opacity: 1;
+  transform: translateY(30px);
+  transition-duration: .3s;
+}
