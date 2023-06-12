@@ -13,9 +13,8 @@ Therefore, as an software engineer our job is to ease the path of this transitio
 4.Reviewing products
 5.Maintaining data consistency across tables
 
- 2. REQUIREMENTS
-
-    A Customer can see the account details and can update if required.
+ ## Features 
+   A Customer can see the account details and can update if required.
     Customer can search the products according to the category.
     Customer can add his wishlist to the cart and can see the total amount.
     Customer can update the cart whenever required.
@@ -27,10 +26,10 @@ Therefore, as an software engineer our job is to ease the path of this transitio
     Seller can know the sales on a particular day or month or year.
     
     
-    ## Github link for Back-end & infor 
+   ## Github link for Back-end & infor 
     [Back-end repository](https://github.com/Denisomondi/GeoDeliver-Backend)
     
-    ## Getting Started for back-end
+   ## Getting Started for back-end
 
 To set up the Delivery System API locally, follow these steps:
 
