@@ -7,7 +7,7 @@ Therefore, as an software engineer our job is to ease the path of this transitio
 1. [Denis omondi](https://github.com/Denisomondi)
 5. [Teddy wambua](https://github.com/teddy5456)
 
-##Inorder To use Live Link
+## Inorder To use Live Link
 please first start the server on you machine on localhost 4567.
 
 ## The Prime Objective 
