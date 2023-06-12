@@ -26,8 +26,8 @@ Therefore, as an software engineer our job is to ease the path of this transitio
     Seller can know the sales on a particular day or month or year.
     
     
-   ## Github link for Back-end & infor 
-   [Back-end Repository](https://github.com/Denisomondi/GeoDeliver-Backend/tree/main)
+   ## Github link for Back-end & infor:
+   [Back-end Repository](https://github.com/Denisomondi/GeoDeliver-Backend/tree/main) click to check the repository.
     
    ## Getting Started for back-end
 
