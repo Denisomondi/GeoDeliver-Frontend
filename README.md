@@ -1,5 +1,6 @@
 # GeoDeliver-Frontend
-
+ 
+ ## INTRODUCTION 
 In this new modern era of online shopping no seller wants to be left behind and every seller want to the shift from offline selling model to an online selling model for a rampant growth.
 Therefore, as an software engineer our job is to ease the path of this transition for the seller.
 ## Authors Names
