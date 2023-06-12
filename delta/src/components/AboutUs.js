@@ -16,7 +16,7 @@ const AboutUs = () => {
         <div className="team-member">
           <img src={bitmoji2} alt="Team Member 1" />
           <h4>Denis Omondi</h4>
-          <p>Team Leader,Backend, frontend</p>
+          <p>Scrum Master, Backend, Frontend</p>
           <div className="social-links">
             <a href="#">Twitter</a>
             <a href="#">LinkedIn</a>
@@ -26,27 +26,7 @@ const AboutUs = () => {
         <div className="team-member">
           <img src={bitmoji2} alt="Team Member 2" />
           <h4>Teddy Wambua</h4>
-          <p>Frontend, Backend</p>
-          <div className="social-links">
-            <a href="#">Twitter</a>
-            <a href="#">LinkedIn</a>
-            <a href="#">Instagram</a>
-          </div>
-        </div>
-        <div className="team-member">
-          <img src={bitmoji2} alt="Team Member 3" />
-          <h4>Justin Karaoke</h4>
-          <p>Frontend</p>
-          <div className="social-links">
-            <a href="#">Twitter</a>
-            <a href="#">LinkedIn</a>
-            <a href="#">Instagram</a>
-          </div>
-        </div>
-        <div className="team-member">
-          <img src={bitmoji2} alt="Team Member 4" />
-          <h4>David Rimui</h4>
-          <p>Frontend</p>
+          <p>Frontend, Backend,css</p>
           <div className="social-links">
             <a href="#">Twitter</a>
             <a href="#">LinkedIn</a>
@@ -59,6 +39,6 @@ const AboutUs = () => {
       </div>
     </div>
   );
-}
+};
 
 export default AboutUs;
