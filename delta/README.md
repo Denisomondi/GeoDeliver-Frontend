@@ -53,13 +53,6 @@ The React application provides the following functionality:
 - About us: Provides information about the website and the company.
 - Sell with us: Gives information on how to become a seller.
 
-## Customization and Extension
-
-You can customize and extend the application by modifying the existing components or creating new ones based on your requirements. The application uses React Router for routing, which allows you to easily add new routes and components.
-
-## Deployment
-
-To deploy the React application, you can use various hosting platforms such as Netlify, Vercel, or GitHub Pages. Follow the deployment instructions provided by your chosen hosting platform to deploy the application.
 
 ## Conclusion
 
