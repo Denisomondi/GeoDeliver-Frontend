@@ -15,25 +15,25 @@ const LoginPage = ({ onLogin }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-  
+
     // Get the entered username or email and password
     const usernameEmail = usernameEmailRef.current.value;
     const password = passwordRef.current.value;
-  
+
     console.log('Login Data:', { usernameEmail, password });
-  
+
     try {
       const response = await fetch(`http://localhost:4567/users?name=${usernameEmail}&password=${password}`);
       if (response.ok) {
         const user = await response.json();
         console.log('User ID:', user.id); // Log the user ID
-        onLogin(user.name, user.email);
+        onLogin(user);
       } else {
         const emailResponse = await fetch(`http://localhost:4567/users?email=${usernameEmail}&password=${password}`);
         if (emailResponse.ok) {
           const user = await emailResponse.json();
           console.log('User ID:', user.id); // Log the user ID
-          onLogin(user.name, user.email);
+          onLogin(user);
         } else {
           setLoginError('Invalid username or password');
         }
@@ -42,23 +42,23 @@ const LoginPage = ({ onLogin }) => {
       setLoginError('Error occurred during login');
     }
   };
-  
+
   const handleSignUp = async (e) => {
     e.preventDefault();
-  
+
     // Get the entered new username, password, and email
     const newUsername = newUsernameRef.current.value;
     const newPassword = newPasswordRef.current.value;
     const confirmPassword = confirmPasswordRef.current.value;
     const email = emailRef.current.value;
-  
+
     console.log('Sign Up Data:', { newUsername, newPassword, confirmPassword, email });
-  
+
     if (newPassword !== confirmPassword) {
       setSignupError('Passwords do not match');
       return;
     }
-  
+
     try {
       const response = await fetch('http://localhost:4567/users', {
         method: 'POST',
@@ -70,13 +70,13 @@ const LoginPage = ({ onLogin }) => {
       if (response.ok) {
         const user = await response.json();
         console.log('User ID:', user.id); // Log the user ID
-        onLogin(user.name, user.email);
+        onLogin(user);
       } else {
         const emailResponse = await fetch(`http://localhost:4567/users?email=${email}`);
         if (emailResponse.ok) {
           const user = await emailResponse.json();
           console.log('User ID:', user.id); // Log the user ID
-          onLogin(user.name, user.email);
+          onLogin(user);
         } else {
           setSignupError('Error occurred during sign up');
         }
@@ -85,7 +85,6 @@ const LoginPage = ({ onLogin }) => {
       setSignupError('Error occurred during sign up');
     }
   };
-  
 
   const toggleSignUp = () => {
     setShowSignUp(!showSignUp);

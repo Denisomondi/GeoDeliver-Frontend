@@ -72,10 +72,10 @@ function App() {
 
     // Asynchronous login process (API call) with a timeout. Loads API while loading login.
     setTimeout(() => {
-      setLoggedIn(true);
-      setUser(user);
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('user', JSON.stringify(user));
+      setLoggedIn(true);
+      setUser(user);
       setLoggingIn(false);
     }, 1200);
   };
@@ -141,21 +141,11 @@ function App() {
                 </>
               }
             />
-            <Route path="/cart" element={<ShoppingCart products={productData} />} />
+            <Route path="/cart" element={<ShoppingCart products={productData} user={user}/>} />
             <Route path="/CategoriesPage" element={<CategoriesPage />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/sell" element={<SellWithUs />} />
-            <Route
-              path="/Account"
-              element={
-                <AccountManagement
-                  user={user}
-                  userId={user.userId} 
-                  onUpdate={handleLogin}
-                  onLogout={handleLogout}
-                />
-              }
-            />
+            <Route path="/Account" element={<AccountManagement loggedIn={loggedIn} user={user} onUpdate={handleLogin} onLogout={handleLogout} />} />
           </Routes>
         </Router>
       </ShoppingCartProvider>

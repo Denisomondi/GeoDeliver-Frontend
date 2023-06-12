@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import Checkout from './Checkout';
 
-const ShoppingCart = () => {
+const ShoppingCart = ({ user }) => {
   const { selectedProducts, removeFromCart, clearCart } = useContext(ShoppingCartContext);
   const [showCheckout, setShowCheckout] = useState(false);
 
@@ -101,7 +101,7 @@ const ShoppingCart = () => {
             <button className="close-button" onClick={handleCloseCheckout}>
               <FontAwesomeIcon icon={faTimes} />
             </button>
-            <Checkout orderData={orderData} onClose={handleCloseCheckout} />
+            <Checkout orderData={orderData} onClose={handleCloseCheckout} user={user} />
           </div>
         </div>
       )}
