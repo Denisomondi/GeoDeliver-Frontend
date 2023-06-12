@@ -24,8 +24,20 @@ Therefore, as an software engineer our job is to ease the path of this transitio
     Customer can review the products which have been purchased.
     Seller can update the stock of a particular product whether it is available or not.
     Seller can keep track of total sales of his products.
-    Seller can know the sales on a particular day or month or year.
-    
+    Seller can know the sales on a particular day or month or year. 
+  ## Getting started for front-end
+clone the repository to your local machine.
+
+git clone:
+
+Install the required depedencies using
+
+npm install bundle install
+
+Run the application using
+
+bundle exec rake server npm start
+
     
    ## Github link for Back-end & infor:
    [Back-end Repository](https://github.com/Denisomondi/GeoDeliver-Backend/tree/main) click to check the Back-end repository for Geodeliver.
