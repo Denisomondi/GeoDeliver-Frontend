@@ -4,6 +4,7 @@ import './Navbar.css';
 import myImage from './vecteezy_3d-rendering-online-payment-for-ecommerce-or-online-shop_8508172_957.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import HistoryComponent from './OrderHistory';
 
 const Navbar = ({ onLogout, onSearchButtonClick }) => {
   const [selectedItem, setSelectedItem] = useState('home');
@@ -55,6 +56,11 @@ const Navbar = ({ onLogout, onSearchButtonClick }) => {
         <li className={selectedItem === 'account' ? 'selected' : ''}>
           <Link to="/account" onClick={() => setSelectedItem('account')}>
             Account
+          </Link>
+        </li>
+        <li className={selectedItem === 'History' ? 'selected' : ''}>
+          <Link to="/History" onClick={() => setSelectedItem('History')}>
+            History
           </Link>
         </li>
         <li className="logout">

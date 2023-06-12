@@ -17,6 +17,7 @@ import ProductCard from './components/ProductCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import HistoryComponent from './components/OrderHistory';
 
 // LoadingScreen component
 const LoadingScreen = () => {
@@ -144,6 +145,7 @@ function App() {
             <Route path="/cart" element={<ShoppingCart products={productData} user={user}/>} />
             <Route path="/CategoriesPage" element={<CategoriesPage />} />
             <Route path="/about" element={<AboutUs />} />
+            <Route path="History" element={<HistoryComponent user={user}/>} />
             <Route path="/sell" element={<SellWithUs />} />
             <Route path="/Account" element={<AccountManagement loggedIn={loggedIn} user={user} onUpdate={handleLogin} onLogout={handleLogout} />} />
           </Routes>

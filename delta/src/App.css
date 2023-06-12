@@ -438,3 +438,44 @@
   border-radius: 50%;
 }
 
+
+.account-management {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+
+.account-management h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.account-management p {
+  margin-bottom: 10px;
+}
+
+.account-management input[type="text"],
+.account-management input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #d11010;
+  border-radius: 4px;
+}
+
+.account-management button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #06750a;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.account-management button:hover {
+  background-color: #45a049;
+}

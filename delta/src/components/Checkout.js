@@ -18,7 +18,7 @@ const Checkout = ({ orderData, user }) => {
   
       console.log('Order item being posted:', orderItemData); // Log the object being posted
   
-      return fetch('/order_items', {
+      return fetch('http://localhost:4567/history', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
