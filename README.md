@@ -28,7 +28,7 @@ Therefore, as an software engineer our job is to ease the path of this transitio
     
     
    ## Github link for Back-end & infor:
-   [Back-end Repository](https://github.com/Denisomondi/GeoDeliver-Backend/tree/main) click to check the repository.
+   [Back-end Repository](https://github.com/Denisomondi/GeoDeliver-Backend/tree/main) click to check the Back-end repository for Geodeliver.
     
    ## Getting Started for back-end
 
