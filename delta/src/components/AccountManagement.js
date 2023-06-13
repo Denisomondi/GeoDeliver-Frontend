@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './AccountManagement.css'
+import './AccountManagement.css';
 
 const AccountManagement = ({ loggedIn, user, onUpdate, onLogout }) => {
   const [name, setName] = useState(user.name);
@@ -21,6 +21,25 @@ const AccountManagement = ({ loggedIn, user, onUpdate, onLogout }) => {
     onUpdate(updatedUser);
   };
 
+  const handleDelete = () => {
+    fetch(`/api/users/${user.id}`, {
+      method: 'DELETE',
+    })
+      .then(response => {
+        if (response.ok) {
+          // Handle successful deletion
+          // For example, you can redirect the user or perform any necessary cleanup
+          console.log('User account deleted');
+        } else {
+          // Handle error case
+          console.error('Failed to delete user account');
+        }
+      })
+      .catch(error => {
+        console.error('Error occurred while deleting user account', error);
+      });
+  };
+
   return (
     <div>
       <h2>Account Management</h2>
@@ -34,10 +53,10 @@ const AccountManagement = ({ loggedIn, user, onUpdate, onLogout }) => {
           Password:
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </p>
-        {/* Display orders and other user information as needed */}
       </div>
       <button className='btn' onClick={handleUpdate}>Update Account</button>
       <button className='btn' onClick={onLogout}>Logout</button>
+      <button className='btn delete-btn' onClick={handleDelete}>Delete Account</button>
     </div>
   );
 };

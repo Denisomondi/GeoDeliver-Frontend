@@ -49,6 +49,15 @@ const ProductForm = () => {
       if (response.ok) {
         const product = await response.json();
         console.log('Product created:', product);
+
+        // Reset the form inputs after successful submission
+        setName('');
+        setPrice('');
+        setImageFile(null);
+        setImageUrl('');
+        setCategory('');
+        setDescription('');
+        setShowCategory(false);
       } else {
         console.error('Product creation failed:', response.status);
       }
@@ -103,7 +112,7 @@ const ProductForm = () => {
           <div className="dropdown">
             <button className="dropdown-button">Category</button>
             <div className="dropdown-content">
-              <label>
+            <label>
                 <input type="radio" name="category" value="Books" checked={category === 'Books'} onChange={handleCategoryChange} />
                 <span>Books</span>
               </label>
