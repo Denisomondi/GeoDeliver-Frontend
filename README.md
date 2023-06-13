@@ -8,7 +8,7 @@ Therefore, as an software engineer our job is to ease the path of this transitio
 5. [Teddy wambua](https://github.com/teddy5456)
 
 ## livelink
-https://geo-deliver-kk95.vercel.app/
+(https://geo-deliverre.vercel.app/)
 ## Inorder To use Live Link
 please first start the server, https://github.com/Denisomondi/GeoDeliver-Backend on your machine on localhost4567.
 
