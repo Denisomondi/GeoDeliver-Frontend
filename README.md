@@ -7,6 +7,11 @@ Therefore, as an software engineer our job is to ease the path of this transitio
 1. [Denis omondi](https://github.com/Denisomondi)
 5. [Teddy wambua](https://github.com/teddy5456)
 
+## livelink
+https://geo-deliver-kk95.vercel.app/
+## Inorder To use Live Link
+please first start the server, https://github.com/Denisomondi/GeoDeliver-Backend on your machine on localhost4567.
+
 ## The Prime Objective 
 1.Viewing orders
 2.Placing orders
