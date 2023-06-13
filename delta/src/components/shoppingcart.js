@@ -9,6 +9,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 const ShoppingCart = ({ user }) => {
   const { selectedProducts, removeFromCart, clearCart } = useContext(ShoppingCartContext);
   const [showCheckout, setShowCheckout] = useState(false);
+  const [orderCreated, setOrderCreated] = useState(false); // Track if an order has been created
 
   const handleRemoveFromCart = (productId) => {
     removeFromCart(productId);
@@ -34,6 +35,7 @@ const ShoppingCart = ({ user }) => {
 
   const handleCloseCheckout = () => {
     setShowCheckout(false);
+    setOrderCreated(true); // Set orderCreated to true after checkout
   };
 
   const orderData = {
@@ -48,66 +50,76 @@ const ShoppingCart = ({ user }) => {
 
   console.log('orderData:', orderData); // Log the orderData to the console
 
-  return (
-    <div>
-      <h2 className="shopping-cart">Shopping Cart</h2>
-      {selectedProducts.length === 0 ? (
-        <p>Your shopping cart is empty.</p>
-      ) : (
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Product Name</th>
-              <th>Price</th>
-              <th className="action">remove</th>
-            </tr>
-          </thead>
-          <tbody>
-            {selectedProducts.map((product) => (
-              <tr key={product.id}>
-                <td>{product.name}</td>
-                <td>${product.price.toFixed(2)}</td>
-                <td>
-                  <button 
-                    className="button"
-                    onClick={() => handleRemoveFromCart(product.id)}
-                  >
-                    <FontAwesomeIcon icon={faTrash} />
-                  </button>
-                </td>
+  // Render different content based on whether an order has been created
+  if (orderCreated) {
+    return (
+      <div>
+        <h2>Order Created</h2>
+        <p>Thank you for your purchase!</p>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <h2 className="shopping-cart">Shopping Cart</h2>
+        {selectedProducts.length === 0 ? (
+          <p>Your shopping cart is empty.</p>
+        ) : (
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th className="action">remove</th>
               </tr>
-            ))}
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colSpan={2}>Total Price:</td>
-              <td className="price">${calculateTotalPrice()}</td>
-            </tr>
-          </tfoot>
-        </table>
-      )}
-      {selectedProducts.length > 0 && (
-        <div>
-          <button className="clear" onClick={handleClearCart}>
-            Clear Cart
-          </button>
-          <button className="checkout" onClick={handleOpenCheckout}>
-            Checkout
-          </button>
-        </div>
-      )}
-      {showCheckout && (
-        <div className="checkout-popup">
-          <div className="checkout-popup-inner">
-            <button className="close-button" onClick={handleCloseCheckout}>
-              <FontAwesomeIcon icon={faTimes} />
+            </thead>
+            <tbody>
+              {selectedProducts.map((product) => (
+                <tr key={product.id}>
+                  <td>{product.name}</td>
+                  <td>${product.price.toFixed(2)}</td>
+                  <td>
+                    <button
+                      className="button"
+                      onClick={() => handleRemoveFromCart(product.id)}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colSpan={2}>Total Price:</td>
+                <td className="price">${calculateTotalPrice()}</td>
+              </tr>
+            </tfoot>
+          </table>
+        )}
+        {selectedProducts.length > 0 && (
+          <div>
+            <button className="clear" onClick={handleClearCart}>
+              Clear Cart
             </button>
-            <Checkout orderData={orderData} onClose={handleCloseCheckout} user={user} />
+            <button className="checkout" onClick={handleOpenCheckout}>
+              Checkout
+            </button>
           </div>
-        </div>
-      )}
-    </div>
-  );
+        )}
+        {showCheckout && (
+          <div className="checkout-popup">
+            <div className="checkout-popup-inner">
+              <button className="close-button" onClick={handleCloseCheckout}>
+                <FontAwesomeIcon icon={faTimes} />
+              </button>
+              <Checkout orderData={orderData} onClose={handleCloseCheckout} user={user} />
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
 };
 
 export default ShoppingCart;

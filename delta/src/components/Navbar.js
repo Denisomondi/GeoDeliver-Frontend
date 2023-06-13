@@ -38,11 +38,6 @@ const Navbar = ({ onLogout, onSearchButtonClick }) => {
             Categories
           </Link>
         </li>
-        <li className={selectedItem === 'about' ? 'selected' : ''}>
-          <Link to="/about" onClick={() => setSelectedItem('about')}>
-            About Us
-          </Link>
-        </li>
         <li className={selectedItem === 'sell' ? 'selected' : ''}>
           <Link to="/sell" onClick={() => setSelectedItem('sell')}>
             Sell with Us
@@ -61,6 +56,11 @@ const Navbar = ({ onLogout, onSearchButtonClick }) => {
         <li className={selectedItem === 'History' ? 'selected' : ''}>
           <Link to="/History" onClick={() => setSelectedItem('History')}>
             History
+          </Link>
+        </li>
+        <li className={selectedItem === 'about' ? 'selected' : ''}>
+          <Link to="/about" onClick={() => setSelectedItem('about')}>
+            About Us
           </Link>
         </li>
         <li className="logout">
